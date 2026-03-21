@@ -77,6 +77,7 @@ const FASES = [
     label: "Transformação",
     cor: "#34d399",
     desc: "Criar novos dicts e listas a partir de dados existentes",
+    hidden: true,
   },
   {
     id: "funcoes",
@@ -932,6 +933,9 @@ Python FC: 1V 1E 0D`,
   },
 ];
 
+const FASES_OCULTAS = new Set(FASES.filter((f) => f.hidden).map((f) => f.id));
+const DESAFIOS_VISIVEIS = DESAFIOS.filter((d) => !FASES_OCULTAS.has(d.fase));
+
 interface Desafio {
   fase: string;
   numero: number;
@@ -1114,7 +1118,7 @@ export default function DesafiosAPI() {
 
   const desafiosFiltrados = faseAtiva
     ? DESAFIOS.filter((d) => d.fase === faseAtiva)
-    : DESAFIOS;
+    : DESAFIOS_VISIVEIS;
 
   const toggleConcluido = (key: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -1145,12 +1149,12 @@ export default function DesafiosAPI() {
               <div
                 className="h-full bg-gradient-to-r from-primary to-cyan-500 rounded transition-all duration-500 ease-in-out"
                 style={{
-                  width: `${(concluidos.size / DESAFIOS.length) * 100}%`,
+                  width: `${(concluidos.size / DESAFIOS_VISIVEIS.length) * 100}%`,
                 }}
               />
             </div>
             <span className="font-mono text-[0.82rem] text-muted-foreground/60 font-medium whitespace-nowrap">
-              {concluidos.size}/{DESAFIOS.length}
+              {concluidos.size}/{DESAFIOS_VISIVEIS.length}
             </span>
           </div>
         </div>
@@ -1165,9 +1169,9 @@ export default function DesafiosAPI() {
                 : "border-border bg-transparent text-muted-foreground"
             }`}
           >
-            Todas ({DESAFIOS.length})
+            Todas ({DESAFIOS_VISIVEIS.length})
           </button>
-          {FASES.map((f) => {
+          {FASES.filter((f) => !f.hidden).map((f) => {
             const count = DESAFIOS.filter((d) => d.fase === f.id).length;
             const done = DESAFIOS.filter(
               (d) => d.fase === f.id && concluidos.has(`${d.fase}-${d.numero}`)
