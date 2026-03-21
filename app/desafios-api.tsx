@@ -122,7 +122,11 @@ const DESAFIOS = [
 267
 fire
 flying`,
-    dica: `Lembre: "types" é uma lista. Para acessar o primeiro item use [0], depois navegue nas chaves internas.`,
+    dicas: [
+      `Pense no dicionário como uma ficha cadastral: cada informação tem uma etiqueta (a chave). Para ler o nome, basta "abrir a gaveta" certa com dados["nome_da_chave"].`,
+      `As primeiras três informações (nome, peso, experiência) estão na "camada de fora" do dicionário — é só acessar direto. Já os tipos estão guardados dentro de uma lista, como uma pasta com várias fichas dentro.`,
+      `"types" é uma lista com dois itens. Para pegar o primeiro, use [0]. Mas cada item dessa lista também é um dicionário — então depois do [0] você ainda precisa entrar em mais uma "gaveta" para chegar no nome do tipo.`,
+    ],
     conceitos: ["acesso a chaves", "lista dentro de dict", "acesso aninhado"],
   },
   {
@@ -152,7 +156,11 @@ flying`,
 
 Use f-string para formatar.`,
     saida_esperada: `São Paulo: 22.5°C (sensação de 23.1°C), nublado, umidade 68%`,
-    dica: `Extraia cada valor em uma variável separada antes de montar a f-string. "weather" é uma lista — precisa do [0].`,
+    dicas: [
+      `A ideia é juntar vários pedaços de informação numa frase só. Primeiro, descubra onde cada pedaço mora dentro do dicionário — alguns estão mais "escondidos" que outros.`,
+      `Tente guardar cada valor numa variável separada (ex: cidade = dados["name"]). Isso facilita na hora de montar a frase. Lembre que dentro de "main" tem vários valores, e "weather" funciona diferente dos outros...`,
+      `"weather" é uma lista (repare nos colchetes []), então mesmo tendo só um item, você precisa usar [0] para entrar nele. Depois, use uma f-string para colar tudo: f"{cidade}: {temp}°C ...".`,
+    ],
     conceitos: ["acesso aninhado", "f-string", "lista com um item"],
   },
   {
@@ -187,7 +195,11 @@ Use f-string para formatar.`,
 Vila Belmiro
 0.61
 Neymar Jr. jogou 716 partidas pelo(s) clube(s)`,
-    dica: `Para a média, divida gols por jogos e use :.2f na f-string. O caminho pro estádio é: dados → jogador → clube → estadio.`,
+    dicas: [
+      `Imagine que os dados são pastas dentro de pastas. Para chegar no estádio, você precisa abrir a pasta "jogador", depois a pasta "clube", e aí sim encontrar "estadio".`,
+      `Para a média de gols por jogo, é uma divisão simples: gols dividido por jogos. O resultado vai ter muitas casas decimais — você vai precisar dizer ao Python para mostrar só duas.`,
+      `O caminho completo para o estádio é dados["jogador"]["clube"]["estadio"]. Para mostrar a média com 2 casas, use :.2f dentro da f-string — por exemplo: f"{media:.2f}".`,
+    ],
     conceitos: ["acesso profundo", "operações matemáticas", "f-string com formatação"],
   },
   {
@@ -223,7 +235,11 @@ False
 Primeiro código em Python!
 14.0
 @python_dev_br tem 12450 seguidores`,
-    dica: `Use round(valor, 1) ou :.1f para a proporção. Para o @, é só concatenar na f-string.`,
+    dicas: [
+      `Olhe o dicionário como um perfil de rede social. Cada informação tem seu "campo". Comece pelos mais fáceis: username e verified estão logo ali dentro de "user".`,
+      `O post fixado está "escondido" um nível mais fundo — é um dicionário dentro de outro. Para a proporção, pense: se alguém tem 100 seguidores e segue 10, a proporção é 100 / 10 = 10.0.`,
+      `Para arredondar, você pode usar round(valor, 1) ou formatar com :.1f. O post fixado está em dados["user"]["pinned_post"]["text"]. Na f-string, o @ é só texto normal: f"@{username} tem ...".`,
+    ],
     conceitos: ["booleanos", "round / formatação", "acesso aninhado"],
   },
 
@@ -257,7 +273,11 @@ Garota de Ipanema - Tom Jobim
 Trem-Bala - Ana Vilela
 Total de plays: 8740000
 Média de plays: 1748000.0`,
-    dica: `Para o total, use o padrão acumulador (total = 0, depois total += ...). Para a média, divida o total por len(dados["musicas"]).`,
+    dicas: [
+      `Você tem uma lista de músicas. Precisa passar por cada uma, como se estivesse folheando um álbum de figurinhas — olhando uma por uma. Em Python, o "for" faz exatamente isso.`,
+      `Para somar todos os plays, pense numa calculadora: comece do zero e vá somando o valor de cada música. Crie uma variável antes do loop (ex: total = 0) e dentro do loop vá adicionando.`,
+      `Dentro do for, cada música é um dicionário. Acesse com musica["titulo"] e musica["plays"]. Para a média, depois do loop, divida o total pelo número de músicas — use len() para contar quantas tem na lista.`,
+    ],
     conceitos: ["for loop", "acumulador", "len()", "f-string"],
   },
   {
@@ -300,7 +320,11 @@ São Paulo: +7
 Cruzeiro: +3
 
 Time com mais vitórias: Botafogo (13)`,
-    dica: `Para encontrar o time com mais vitórias, use uma variável para guardar o melhor até agora e compare a cada volta do loop.`,
+    dicas: [
+      `São três tarefas, mas todas usam o mesmo truque: percorrer a lista de times com um "for". Resolva uma de cada vez — comece imprimindo a posição e os pontos de cada time.`,
+      `O saldo de gols é como o saldo da conta bancária: o que entrou menos o que saiu. Subtraia gols_contra de gols_pro para cada time. Para achar o time com mais vitórias, pense assim: se você está numa fila e quer achar a pessoa mais alta, você compara cada uma com a mais alta que viu até agora.`,
+      `Antes do loop, crie duas variáveis: melhor_time = "" e mais_vitorias = 0. Dentro do loop, se o time atual tem mais vitórias que mais_vitorias, atualize as duas variáveis. No final do loop, você terá o campeão de vitórias.`,
+    ],
     conceitos: ["for loop", "operações dentro do loop", "comparação / máximo"],
   },
   {
@@ -341,7 +365,11 @@ Poção de Mana - 25 ouro
 Valor total: 635 ouro
 Consumíveis: 3
 Itens valiosos (>100): Espada de Ferro, Anel de Força, Arco Longo`,
-    dica: `Use contadores separados: um para o total de valor, outro para contar consumíveis. Para itens valiosos, tente acumular em uma lista com .append().`,
+    dicas: [
+      `O inventário é uma lista de itens. Passe por cada um com um "for" — como se estivesse abrindo a mochila e vendo item por item. Comece só imprimindo o nome e valor de cada um.`,
+      `Você vai precisar de "ajudantes" — variáveis que ficam anotando coisas enquanto você percorre os itens. Um ajudante soma o valor total, outro conta os consumíveis. Crie eles antes do loop, zerados.`,
+      `Para o valor total: total += item["valor"]. Para consumíveis: if item["tipo"] == "consumivel", aí soma 1 no contador. Para itens valiosos, crie uma lista vazia antes do loop e use .append() para guardar o nome dos itens com valor > 100.`,
+    ],
     conceitos: ["for loop", "múltiplos acumuladores", "contador", ".append()"],
   },
   {
@@ -379,7 +407,11 @@ Valor total em estoque: R$ 67384.00
 
 Mais caro: Monitor 24pol (R$ 899.90)
 Mais barato: Hub USB-C (R$ 79.90)`,
-    dica: `Para valor em estoque: multiplique preço × estoque de cada produto e acumule. Para mais caro/barato, guarde o produto atual e compare a cada iteração.`,
+    dicas: [
+      `Pense nesse exercício como organizar uma loja: você passa por cada produto na prateleira e anota as informações. Comece imprimindo cada produto com seu preço e estoque — isso é só um for com uma f-string.`,
+      `Produto sem estoque é aquele que tem estoque igual a zero. Para o valor total em estoque, pense assim: se tem 45 fones de R$ 89.90, o valor em fones na loja é 45 x 89.90. Some isso para todos os produtos.`,
+      `Para achar o mais caro e mais barato, use a mesma ideia da "fila": guarde o produto atual como candidato e compare com cada novo produto. Comece com o primeiro produto como referência e vá atualizando se encontrar um com preço maior (ou menor).`,
+    ],
     conceitos: ["for loop", "multiplicação no loop", "min/max manual", "estoque zero"],
   },
 
@@ -418,7 +450,11 @@ Não-lendários fortes: charizard, gengar
 
 Fortes: charizard, mewtwo, rayquaza, lugia
 Fracos: pikachu, bulbasaur, jigglypuff, gengar`,
-    dica: `Combine o for com if. Para separar em duas listas, crie duas listas vazias antes do loop e use .append() com a condição.`,
+    dicas: [
+      `Pense no "if" dentro do "for" como um porteiro: ele olha cada Pokémon e só deixa passar quem atende à condição. Comece com a tarefa mais simples — imprimir só os lendários.`,
+      `"legendary" é True ou False. Você não precisa escrever == True — basta usar: if pokemon["legendary"]. Para combinar duas condições (ex: não é lendário E tem ataque alto), use "and" para juntar as duas perguntas.`,
+      `Para separar em duas listas, crie fortes = [] e fracos = [] antes do loop. Dentro do loop, use if/else para decidir em qual lista colocar cada Pokémon com .append(). No final, imprima as duas listas.`,
+    ],
     conceitos: ["for + if", "booleano como filtro", "múltiplas condições", "separar listas"],
   },
   {
@@ -457,7 +493,11 @@ SP: R$ 56500 | RJ: R$ 17500 | MG: R$ 18200
 Bateram a meta: 57.1%
 
 Maior destaque: Carla (+R$ 4000 acima da meta)`,
-    dica: `Para total por região, crie um dict como totais = {"SP": 0, "RJ": 0, "MG": 0} e acumule dentro do loop. Para porcentagem: (acertos / total) * 100.`,
+    dicas: [
+      `Para cada vendedor, compare o valor vendido com a meta. Se vendeu mais ou igual à meta, bateu. Se vendeu menos, não bateu. É como comparar a nota de uma prova com a nota mínima para passar.`,
+      `Para somar por região, imagine três caixinhas — uma para SP, uma para RJ, uma para MG. Crie um dicionário com essas três regiões começando em zero. Dentro do loop, olhe a região do vendedor e coloque o valor na caixinha certa.`,
+      `Para a porcentagem, conte quantos bateram a meta (um contador que soma 1 a cada "aprovado") e divida pelo total de vendedores, multiplicando por 100. Para o destaque, calcule valor - meta para cada um e guarde o que tiver a maior diferença.`,
+    ],
     conceitos: ["for + if/else", "acumulador por categoria", "porcentagem", "emoji condicional"],
   },
   {
@@ -502,7 +542,11 @@ Posts por autor:
 TechBR: 2
 ChefMaria: 1
 ...`,
-    dica: `Para sorted(), use o parâmetro key: sorted(lista, key=lambda x: x["likes"], reverse=True). Para contar por autor, crie um dict e use .get() para inicializar.`,
+    dicas: [
+      `Esse exercício tem quatro mini-tarefas. Comece pela mais fácil: filtrar por categoria. Para cada notícia, pergunte: "a categoria é tech?" Se sim, guarde ou imprima.`,
+      `Para ordenar, o Python tem uma ferramenta chamada sorted() que coloca uma lista em ordem. Você pode dizer POR QUE critério quer ordenar — nesse caso, por número de likes, do maior para o menor. O engajamento é só a soma de likes + comentários de cada post.`,
+      `sorted() funciona assim: sorted(lista, key=lambda x: x["likes"], reverse=True). "reverse=True" faz ir do maior para o menor. Para contar posts por autor, crie um dicionário vazio e, para cada post, use .get(autor, 0) + 1 para ir contando.`,
+    ],
     conceitos: ["sorted() com lambda", "engajamento calculado", "contagem com dict", "top N"],
   },
 
@@ -538,7 +582,7 @@ Média: 20.94°C
 
 Resumo:
 {"temp_max": 25.1, "temp_min": 17.8, "temp_media": 20.94, "clima_frequente": "nublado"}`,
-    dica: `Para a hora, use split() na string "2024-08-01 09:00:00" → .split(" ")[1][:5]. Para descrição mais comum, conte ocorrências com um dict.`,
+    dicas: [`Para a hora, use split() na string "2024-08-01 09:00:00" → .split(" ")[1][:5]. Para descrição mais comum, conte ocorrências com um dict.`],
     conceitos: ["criar dict novo", "split()", "min/max", "contagem de frequência"],
   },
   {
@@ -579,7 +623,7 @@ Com queijo: X-Burguer, X-Bacon
 
 Combo econômico:
 X-Burguer + Batata Frita P + Coca-Cola 350ml = R$ 42.70`,
-    dica: `Para agrupar, crie um dict vazio e use .setdefault(categoria, []).append(nome). Para o combo, filtre por categoria e pegue o min() com key=lambda.`,
+    dicas: [`Para agrupar, crie um dict vazio e use .setdefault(categoria, []).append(nome). Para o combo, filtre por categoria e pegue o min() com key=lambda.`],
     conceitos: ["agrupar em dict", ".setdefault()", "busca em lista", "min() com lambda"],
   },
   {
@@ -625,7 +669,7 @@ Sage: 3 partidas, 39 kills, KDA médio 0.69
 Omen: 1 partida, 19 kills, KDA médio 1.63
 
 Melhor agente: Jett`,
-    dica: `Para estatísticas por agente: crie um dict onde a chave é o nome do agente e o valor é outro dict com os acumuladores. Cuidado com divisão por zero no deaths!`,
+    dicas: [`Para estatísticas por agente: crie um dict onde a chave é o nome do agente e o valor é outro dict com os acumuladores. Cuidado com divisão por zero no deaths!`],
     conceitos: ["KDA como operação", "agrupamento complexo", "dict de dicts", "taxa/porcentagem"],
   },
 
@@ -672,7 +716,11 @@ comparar("pikachu", "charizard")
 → charizard: HP 78, ATK 84
 → Vencedor em HP: charizard
 → Vencedor em ATK: charizard`,
-    dica: `Use for + if + return para buscar_pokemon. Para mais_forte, use max() com key=lambda. Para comparar, chame buscar_pokemon() dentro da função.`,
+    dicas: [
+      `Uma função é como uma "máquina" que recebe algo (a entrada), faz alguma coisa com aquilo, e devolve um resultado. Comece pela mais simples: buscar_pokemon. Ela recebe um nome, percorre a lista e devolve o Pokémon certo.`,
+      `Para buscar_pokemon: use um for para percorrer a lista e, se o nome bater, devolva aquele Pokémon. Se o for terminar sem achar nada, devolva None (que é o jeito do Python de dizer "não encontrei"). Para filtrar_por_tipo, é parecido mas você junta os resultados numa lista em vez de parar no primeiro.`,
+      `Para mais_forte, o Python tem uma ferramenta que acha o maior valor numa lista. Para comparar, uma boa ideia é reaproveitar a função buscar_pokemon que você já criou — chame ela de dentro da função comparar para pegar os dados de cada Pokémon.`,
+    ],
     conceitos: ["def / return", "None como retorno", "max() com key", "funções que chamam funções"],
   },
   {
@@ -715,7 +763,11 @@ Teste com o pedido fornecido.`,
 
 Total: R$ 519.40
 Itens sem estoque: 1`,
-    dica: `processar_pedido() deve chamar verificar_estoque() e calcular_subtotal() internamente. Use listas para acumular aprovados e rejeitados.`,
+    dicas: [
+      `Pense nesse sistema como uma loja real: antes de aprovar um item do pedido, o caixa verifica se tem no estoque. Comece criando as funções mais simples (verificar_estoque e calcular_subtotal) e teste elas sozinhas antes de juntar tudo.`,
+      `verificar_estoque recebe o código do produto e a quantidade pedida. Ela olha no catálogo se o estoque daquele produto é maior ou igual à quantidade. calcular_subtotal é só multiplicar o preço pela quantidade.`,
+      `processar_pedido é a função "chefe" — ela percorre cada item do pedido e USA as outras funções para tomar decisões. Crie duas listas (aprovados e sem estoque) e um total. Para cada item, chame verificar_estoque: se tiver, calcule o subtotal e adicione; se não tiver, coloque na lista de rejeitados.`,
+    ],
     conceitos: ["funções compostas", "retornar dict", "validação", "formatação de moeda"],
   },
 
@@ -809,7 +861,12 @@ Ana: 8.67 | Bruno: 8.25 | Carla: 8.63 | Diego: 7.83
 Premium vs Básico:
 Média de episódios premium: 148.5
 Média de episódios básico: 63.0`,
-    dica: `Quebre o problema! Faça uma função de cada vez, teste, e depois combine no relatorio_geral(). Para recomendação: pegue todos os títulos, remova os que o usuário já viu, filtre por nota.`,
+    dicas: [
+      `Esse desafio parece grande, mas é como montar um quebra-cabeça: peça por peça. Comece pelas funções pequenas (total_episodios, nota_media) e só depois passe para as mais complexas. Teste cada uma separadamente antes de juntar.`,
+      `Para total_episodios, percorra o histórico do usuário somando os episódios. Para nota_media, some todas as notas e divida pela quantidade. Para conteudo_mais_popular, a ideia é: para cada título, conte em quantos históricos de usuários ele aparece — o que aparece mais vezes é o mais popular.`,
+      `A recomendação funciona assim: primeiro, faça uma lista de tudo que o usuário JÁ assistiu. Depois, percorra os outros usuários e veja o que eles assistiram que NÃO está na lista do primeiro — mas só pegue os que têm nota boa (>= 8.5). Para o ranking, use sorted() nos usuários comparando pelo total de episódios.`,
+      `Para o bônus premium vs básico: separe os usuários em dois grupos pelo plano, calcule o total de episódios de cada grupo e divida pela quantidade de pessoas. O relatorio_geral() é só uma função que chama todas as outras e imprime tudo de forma organizada.`,
+    ],
     conceitos: ["funções compostas", "set para exclusão", "sorted com lambda", "relatório formatado"],
   },
   {
@@ -865,7 +922,12 @@ Retrospecto Python FC vs Java United:
 Jogo 1: Python FC 3 x 1 Java United
 Jogo 2: Java United 2 x 2 Python FC
 Python FC: 1V 1E 0D`,
-    dica: `O segredo é inicializar um dict para cada time com todas as stats zeradas ANTES de percorrer os jogos. Cada jogo atualiza DOIS times (mandante e visitante). Use sorted() com key=lambda x: (x["pontos"], x["vitorias"], x["saldo"]) com reverse=True para critérios múltiplos de ordenação.`,
+    dicas: [
+      `Esse é o chefão! Mas a estratégia é a mesma: divida em partes menores. Comece pela função calcular_pontos — ela só olha um jogo e diz se um time ganhou (3 pts), empatou (1 pt) ou perdeu (0 pts).`,
+      `Para gerar_tabela, o truque principal é: antes de olhar os jogos, prepare uma "ficha" para cada time com tudo zerado (pontos, vitórias, empates, derrotas, gols a favor, gols contra). Depois, passe por cada jogo e atualize as fichas. Atenção: cada jogo mexe em DOIS times — o mandante e o visitante.`,
+      `Para saber quem ganhou um jogo: compare gols_mandante com gols_visitante. Se o mandante fez mais gols, ele ganhou (+3 pts) e o visitante perdeu. Se foi igual, empate (+1 pt cada). Some os gols a favor e contra de cada lado.`,
+      `Para ordenar a tabela, o Python permite ordenar por mais de um critério ao mesmo tempo usando uma tupla. O primeiro da tabela é quem tem mais pontos; se empatar, quem tem mais vitórias; se empatar de novo, quem tem melhor saldo de gols. Use sorted() com reverse=True.`,
+    ],
     conceitos: ["sistema completo", "atualizar dois registros por iteração", "ordenação multi-critério", "retrospecto"],
   },
 ];
@@ -879,31 +941,54 @@ interface Desafio {
   dados: string;
   missao: string;
   saida_esperada: string;
-  dica: string;
+  dicas: string[];
   conceitos: string[];
 }
 
-function HintBox({ dica }: { dica: string }) {
-  const [open, setOpen] = useState(false);
+function HintBox({ dicas }: { dicas: string[] }) {
+  const [reveladas, setReveladas] = useState(0);
+  const total = dicas.length;
+
   return (
-    <div
-      className={`rounded-xl border overflow-hidden transition-all duration-200 ${
-        open ? "border-amber-400/30" : "border-border"
-      }`}
-      style={{ background: open ? "rgba(251,191,36,0.08)" : "transparent" }}
-    >
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-2 px-3.5 py-2.5 bg-transparent border-none cursor-pointer font-mono text-xs font-bold tracking-wide text-amber-400 hover:brightness-110"
-      >
-        {open ? <LockOpen size={14} /> : <Lock size={14} />}
-        {open ? "DICA REVELADA" : "CLIQUE PARA VER A DICA"}
-      </button>
-      {open && (
-        <div className="px-3.5 pb-3 font-sans text-sm leading-relaxed text-foreground">
-          {dica}
-        </div>
-      )}
+    <div className="flex flex-col gap-2">
+      {dicas.map((dica, i) => {
+        const visivel = i < reveladas;
+        return (
+          <div
+            key={i}
+            className={`rounded-xl border overflow-hidden transition-all duration-200 ${
+              visivel ? "border-amber-400/30" : "border-border"
+            }`}
+            style={{
+              background: visivel ? "rgba(251,191,36,0.08)" : "transparent",
+            }}
+          >
+            {!visivel && i === reveladas ? (
+              <button
+                onClick={() => setReveladas(reveladas + 1)}
+                className="w-full flex items-center gap-2 px-3.5 py-2.5 bg-transparent border-none cursor-pointer font-mono text-sm font-bold tracking-wide text-amber-400 hover:brightness-110"
+              >
+                <Lock size={14} />
+                {i === 0
+                  ? "PRECISO DE UMA DICA..."
+                  : i === total - 1
+                    ? "AINDA ESTOU PERDIDO... MAIS AJUDA!"
+                    : "QUERO MAIS UMA DICA..."}
+              </button>
+            ) : visivel ? (
+              <>
+                <div className="flex items-center gap-2 px-3.5 pt-2.5 font-mono text-[0.78rem] font-bold tracking-wide text-amber-400/70">
+                  <LockOpen size={12} />
+                  DICA {i + 1} DE {total}
+                </div>
+                <div className="px-3.5 pb-3 pt-1.5 font-sans text-base leading-relaxed text-foreground">
+                  {dica}
+                </div>
+              </>
+            ) : null}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -933,17 +1018,17 @@ function ChallengeCard({
         className="w-full flex items-center gap-3.5 px-5 py-4 bg-transparent border-none cursor-pointer text-left hover:brightness-110"
       >
         <span
-          className="font-mono text-[0.7rem] font-bold px-2.5 py-1 rounded-md whitespace-nowrap tracking-wide"
+          className="font-mono text-[0.8rem] font-bold px-2.5 py-1 rounded-md whitespace-nowrap tracking-wide"
           style={{ color: fase.cor, background: fase.cor + "15" }}
         >
           {d.fase.toUpperCase()} #{d.numero}
         </span>
         <div className="flex-1 min-w-0">
-          <div className="text-foreground font-semibold text-sm flex items-center gap-1.5">
+          <div className="text-foreground font-semibold text-base flex items-center gap-1.5">
             {TEMA_ICONS[d.icone]}
             {d.titulo}
           </div>
-          <div className="text-muted-foreground/60 text-xs mt-0.5">
+          <div className="text-muted-foreground/60 text-sm mt-0.5">
             {d.conceitos.join(" · ")}
           </div>
         </div>
@@ -959,7 +1044,7 @@ function ChallengeCard({
       {expanded && (
         <div className="px-5 pb-5">
           {/* Tema */}
-          <div className="text-xs text-muted-foreground mb-4 leading-relaxed">
+          <div className="text-sm text-muted-foreground mb-4 leading-relaxed">
             {d.tema}
           </div>
 
@@ -967,46 +1052,46 @@ function ChallengeCard({
           <div className="bg-background border border-border rounded-xl mb-4 overflow-hidden">
             <div className="px-3.5 py-2 border-b border-border flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
-              <span className="font-mono text-[0.7rem] text-muted-foreground/60 font-semibold tracking-widest">
+              <span className="font-mono text-[0.8rem] text-muted-foreground/60 font-semibold tracking-widest">
                 DADOS
               </span>
             </div>
-            <pre className="m-0 px-4 py-3.5 font-mono text-xs leading-relaxed text-foreground overflow-x-auto whitespace-pre">
+            <pre className="m-0 px-4 py-3.5 font-mono text-sm leading-relaxed text-foreground overflow-x-auto whitespace-pre">
               {d.dados}
             </pre>
           </div>
 
           {/* Mission */}
           <div className="bg-primary/10 border border-primary/20 rounded-xl px-4 py-3.5 mb-4">
-            <div className="font-mono text-[0.68rem] font-bold text-primary tracking-widest mb-2 flex items-center gap-1.5">
+            <div className="font-mono text-[0.78rem] font-bold text-primary tracking-widest mb-2 flex items-center gap-1.5">
               <Target size={12} />
               MISSÃO
             </div>
-            <pre className="m-0 font-sans text-sm leading-relaxed text-foreground whitespace-pre-wrap">
+            <pre className="m-0 font-sans text-base leading-relaxed text-foreground whitespace-pre-wrap">
               {d.missao}
             </pre>
           </div>
 
           {/* Expected output */}
           <div className="bg-muted border border-border rounded-xl px-4 py-3.5 mb-4">
-            <div className="font-mono text-[0.68rem] font-bold text-muted-foreground/60 tracking-widest mb-2 flex items-center gap-1.5">
+            <div className="font-mono text-[0.78rem] font-bold text-muted-foreground/60 tracking-widest mb-2 flex items-center gap-1.5">
               <ClipboardText size={12} />
               SAÍDA ESPERADA
             </div>
-            <pre className="m-0 font-mono text-xs leading-relaxed text-muted-foreground whitespace-pre-wrap">
+            <pre className="m-0 font-mono text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
               {d.saida_esperada}
             </pre>
           </div>
 
           {/* Hint (collapsible) */}
-          <HintBox dica={d.dica} />
+          <HintBox dicas={d.dicas} />
 
           {/* Concept tags */}
           <div className="flex flex-wrap gap-1.5 mt-3.5">
             {d.conceitos.map((c) => (
               <span
                 key={c}
-                className="font-mono text-[0.68rem] px-2.5 py-0.5 rounded font-semibold"
+                className="font-mono text-[0.78rem] px-2.5 py-0.5 rounded font-semibold"
                 style={{
                   background: "rgba(124,59,237,0.1)",
                   color: "#7c3aed",
@@ -1045,11 +1130,11 @@ export default function DesafiosAPI() {
       <div className="max-w-3xl mx-auto px-5 py-7">
         {/* Header */}
         <div className="mb-7">
-          <h1 className="text-2xl font-bold tracking-tight m-0">
+          <h1 className="text-3xl font-bold tracking-tight m-0">
             <span className="text-primary font-mono font-medium">{"{ }"}</span>{" "}
             Decifrando APIs
           </h1>
-          <p className="text-muted-foreground/60 text-xs mt-1 leading-relaxed">
+          <p className="text-muted-foreground/60 text-sm mt-1 leading-relaxed">
             {DESAFIOS.length} desafios abertos · copie os dados, resolva na sua IDE,
             compare com a saída esperada
           </p>
@@ -1064,7 +1149,7 @@ export default function DesafiosAPI() {
                 }}
               />
             </div>
-            <span className="font-mono text-[0.72rem] text-muted-foreground/60 font-medium whitespace-nowrap">
+            <span className="font-mono text-[0.82rem] text-muted-foreground/60 font-medium whitespace-nowrap">
               {concluidos.size}/{DESAFIOS.length}
             </span>
           </div>
@@ -1074,7 +1159,7 @@ export default function DesafiosAPI() {
         <div className="flex gap-1.5 flex-wrap mb-6">
           <button
             onClick={() => setFaseAtiva(null)}
-            className={`px-3.5 py-1.5 rounded-lg border font-mono text-[0.72rem] font-semibold cursor-pointer transition-colors hover:brightness-110 ${
+            className={`px-3.5 py-1.5 rounded-lg border font-mono text-[0.82rem] font-semibold cursor-pointer transition-colors hover:brightness-110 ${
               !faseAtiva
                 ? "border-primary/60 bg-primary/10 text-primary"
                 : "border-border bg-transparent text-muted-foreground"
@@ -1092,7 +1177,7 @@ export default function DesafiosAPI() {
               <button
                 key={f.id}
                 onClick={() => setFaseAtiva(active ? null : f.id)}
-                className="px-3.5 py-1.5 rounded-lg font-mono text-[0.72rem] font-semibold cursor-pointer flex items-center gap-1.5 transition-colors hover:brightness-110"
+                className="px-3.5 py-1.5 rounded-lg font-mono text-[0.82rem] font-semibold cursor-pointer flex items-center gap-1.5 transition-colors hover:brightness-110"
                 style={{
                   border: `1px solid ${active ? f.cor + "66" : "var(--border)"}`,
                   background: active ? f.cor + "15" : "transparent",
@@ -1111,7 +1196,7 @@ export default function DesafiosAPI() {
 
         {/* Phase description */}
         {faseAtiva && (
-          <div className="px-4 py-3 bg-muted border border-border rounded-xl mb-5 text-sm text-muted-foreground flex items-center gap-2.5">
+          <div className="px-4 py-3 bg-muted border border-border rounded-xl mb-5 text-base text-muted-foreground flex items-center gap-2.5">
             <span className="text-xl">
               {FASE_ICONS[faseAtiva]}
             </span>
@@ -1158,9 +1243,8 @@ export default function DesafiosAPI() {
 
         {/* Footer */}
         <div className="mt-8 px-5 py-4 bg-muted border border-border rounded-xl text-center">
-          <p className="font-mono text-[0.78rem] text-muted-foreground/60 leading-relaxed">
-            Completou tudo? Agora pode usar IA para codar — porque sabe ler o
-            que ela escreve.{" "}
+          <p className="font-mono text-[0.88rem] text-muted-foreground/60 leading-relaxed">
+            Completou tudo? Parabéns!! {" "}
             <Rocket size={14} weight="fill" className="inline-block text-primary" />
           </p>
         </div>
