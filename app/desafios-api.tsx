@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Badge } from "@/components/ui/badge"
 import {
   Key,
   ArrowsClockwise,
@@ -1021,12 +1022,13 @@ function ChallengeCard({
         onClick={onToggle}
         className="w-full flex items-center gap-3.5 px-5 py-4 bg-transparent border-none cursor-pointer text-left hover:brightness-110"
       >
-        <span
-          className="font-mono text-[0.8rem] font-bold px-2.5 py-1 rounded-md whitespace-nowrap tracking-wide"
-          style={{ color: fase.cor, background: fase.cor + "15" }}
+        <Badge
+          variant="outline"
+          className="font-mono text-[0.8rem] font-bold tracking-wide"
+          style={{ color: fase.cor, background: fase.cor + "15", borderColor: fase.cor + "33" }}
         >
           {d.fase.toUpperCase()} #{d.numero}
-        </span>
+        </Badge>
         <div className="flex-1 min-w-0">
           <div className="text-foreground font-semibold text-base flex items-center gap-1.5">
             {TEMA_ICONS[d.icone]}
@@ -1093,16 +1095,18 @@ function ChallengeCard({
           {/* Concept tags */}
           <div className="flex flex-wrap gap-1.5 mt-3.5">
             {d.conceitos.map((c) => (
-              <span
+              <Badge
                 key={c}
-                className="font-mono text-[0.78rem] px-2.5 py-0.5 rounded font-semibold"
+                variant="outline"
+                className="font-mono text-[0.78rem] font-semibold"
                 style={{
                   background: "rgba(124,59,237,0.1)",
                   color: "#7c3aed",
+                  borderColor: "rgba(124,59,237,0.25)",
                 }}
               >
                 {c}
-              </span>
+              </Badge>
             ))}
           </div>
         </div>
@@ -1136,7 +1140,7 @@ export default function DesafiosAPI() {
         <div className="mb-7">
           <h1 className="text-3xl font-bold tracking-tight m-0">
             <span className="text-primary font-mono font-medium">{"{ }"}</span>{" "}
-            Decifrando APIs
+            Praticando Python Básico.
           </h1>
           <p className="text-muted-foreground/60 text-sm mt-1 leading-relaxed">
             {DESAFIOS.length} desafios abertos · copie os dados, resolva na sua IDE,
