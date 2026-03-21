@@ -1,47 +1,92 @@
 "use client";
 
 import { useState } from "react";
+import {
+  Key,
+  ArrowsClockwise,
+  Funnel,
+  GearSix,
+  PuzzlePiece,
+  Skull,
+  GameController,
+  CloudSun,
+  Trophy,
+  DeviceMobile,
+  MusicNote,
+  Sword,
+  ShoppingCart,
+  Newspaper,
+  ForkKnife,
+  ChartBar,
+  FilmStrip,
+  Medal,
+  CaretDown,
+  Lock,
+  LockOpen,
+  Rocket,
+  Check,
+  Target,
+  ClipboardText,
+} from "@phosphor-icons/react";
+
+const FASE_ICONS: Record<string, React.ReactNode> = {
+  acesso: <Key size={14} />,
+  loops: <ArrowsClockwise size={14} />,
+  filtros: <Funnel size={14} />,
+  transformacao: <GearSix size={14} />,
+  funcoes: <PuzzlePiece size={14} />,
+  boss: <Skull size={14} />,
+};
+
+const TEMA_ICONS: Record<string, React.ReactNode> = {
+  game: <GameController size={15} />,
+  weather: <CloudSun size={15} />,
+  football: <Trophy size={15} />,
+  social: <DeviceMobile size={15} />,
+  music: <MusicNote size={15} />,
+  sword: <Sword size={15} />,
+  shop: <ShoppingCart size={15} />,
+  news: <Newspaper size={15} />,
+  food: <ForkKnife size={15} />,
+  chart: <ChartBar size={15} />,
+  film: <FilmStrip size={15} />,
+  trophy: <Medal size={15} />,
+};
 
 const FASES = [
   {
     id: "acesso",
     label: "Acesso Direto",
-    icon: "🔑",
     cor: "#22d3ee",
     desc: "Acessar valores em dicionários simples e aninhados",
   },
   {
     id: "loops",
     label: "Loops + Listas",
-    icon: "🔄",
     cor: "#a78bfa",
     desc: "Iterar sobre listas de dicionários",
   },
   {
     id: "filtros",
     label: "Filtros + Condicionais",
-    icon: "🎯",
     cor: "#fbbf24",
     desc: "Combinar loops com if/else para filtrar dados",
   },
   {
     id: "transformacao",
     label: "Transformação",
-    icon: "⚙️",
     cor: "#34d399",
     desc: "Criar novos dicts e listas a partir de dados existentes",
   },
   {
     id: "funcoes",
     label: "Funções + API",
-    icon: "🧩",
     cor: "#f472b6",
     desc: "Encapsular lógica em funções reutilizáveis",
   },
   {
     id: "boss",
     label: "Boss Final",
-    icon: "🐉",
     cor: "#ef4444",
     desc: "Desafios completos que combinam tudo",
   },
@@ -53,7 +98,8 @@ const DESAFIOS = [
     fase: "acesso",
     numero: 1,
     titulo: "Ficha do Pokémon",
-    tema: "🎮 PokéAPI",
+    tema: "PokéAPI",
+    icone: "game",
     dados: `dados = {
     "name": "charizard",
     "id": 6,
@@ -83,7 +129,8 @@ flying`,
     fase: "acesso",
     numero: 2,
     titulo: "Previsão do Tempo",
-    tema: "🌤️ OpenWeather",
+    tema: "OpenWeather",
+    icone: "weather",
     dados: `dados = {
     "coord": {"lon": -46.63, "lat": -23.55},
     "weather": [
@@ -112,7 +159,8 @@ Use f-string para formatar.`,
     fase: "acesso",
     numero: 3,
     titulo: "Perfil do Jogador",
-    tema: "⚽ API de Futebol",
+    tema: "API de Futebol",
+    icone: "football",
     dados: `dados = {
     "jogador": {
         "nome": "Neymar Jr.",
@@ -146,7 +194,8 @@ Neymar Jr. jogou 716 partidas pelo(s) clube(s)`,
     fase: "acesso",
     numero: 4,
     titulo: "Dados do Usuário",
-    tema: "📱 API de Rede Social",
+    tema: "API de Rede Social",
+    icone: "social",
     dados: `dados = {
     "user": {
         "username": "python_dev_br",
@@ -183,7 +232,8 @@ Primeiro código em Python!
     fase: "loops",
     numero: 1,
     titulo: "Playlist Brasileira",
-    tema: "🎵 API de Músicas",
+    tema: "API de Músicas",
+    icone: "music",
     dados: `dados = {
     "playlist": "Top Brasil",
     "musicas": [
@@ -214,7 +264,8 @@ Média de plays: 1748000.0`,
     fase: "loops",
     numero: 2,
     titulo: "Tabela do Brasileirão",
-    tema: "⚽ API de Futebol",
+    tema: "API de Futebol",
+    icone: "football",
     dados: `dados = {
     "campeonato": "Brasileirão Série A",
     "rodada": 20,
@@ -256,7 +307,8 @@ Time com mais vitórias: Botafogo (13)`,
     fase: "loops",
     numero: 3,
     titulo: "Inventário RPG",
-    tema: "🗡️ API de Game",
+    tema: "API de Game",
+    icone: "sword",
     dados: `dados = {
     "personagem": "Guerreiro",
     "nivel": 15,
@@ -296,7 +348,8 @@ Itens valiosos (>100): Espada de Ferro, Anel de Força, Arco Longo`,
     fase: "loops",
     numero: 4,
     titulo: "Catálogo de Produtos",
-    tema: "🛒 API de E-commerce",
+    tema: "API de E-commerce",
+    icone: "shop",
     dados: `dados = {
     "loja": "TechBR",
     "produtos": [
@@ -335,7 +388,8 @@ Mais barato: Hub USB-C (R$ 79.90)`,
     fase: "filtros",
     numero: 1,
     titulo: "Filtro de Pokémon",
-    tema: "🎮 PokéAPI",
+    tema: "PokéAPI",
+    icone: "game",
     dados: `dados = {
     "pokemon_list": [
         {"name": "pikachu", "type": "electric", "hp": 35, "attack": 55, "legendary": False},
@@ -371,7 +425,8 @@ Fracos: pikachu, bulbasaur, jigglypuff, gengar`,
     fase: "filtros",
     numero: 2,
     titulo: "Relatório de Vendas",
-    tema: "📊 API de Dashboard",
+    tema: "API de Dashboard",
+    icone: "chart",
     dados: `dados = {
     "periodo": "2024-Q3",
     "vendas": [
@@ -409,7 +464,8 @@ Maior destaque: Carla (+R$ 4000 acima da meta)`,
     fase: "filtros",
     numero: 3,
     titulo: "Feed de Notícias",
-    tema: "📰 API de Notícias",
+    tema: "API de Notícias",
+    icone: "news",
     dados: `dados = {
     "feed": [
         {"titulo": "Python 4.0 anunciado", "categoria": "tech", "likes": 1200, "comentarios": 89, "autor": "TechBR"},
@@ -455,7 +511,8 @@ ChefMaria: 1
     fase: "transformacao",
     numero: 1,
     titulo: "Transformar Resposta da API",
-    tema: "🌤️ OpenWeather",
+    tema: "OpenWeather",
+    icone: "weather",
     dados: `dados = {
     "list": [
         {"dt_txt": "2024-08-01 09:00:00", "main": {"temp": 18.5, "humidity": 72}, "weather": [{"description": "chuva leve"}]},
@@ -488,7 +545,8 @@ Resumo:
     fase: "transformacao",
     numero: 2,
     titulo: "Cardápio do iFood",
-    tema: "🍔 API de Delivery",
+    tema: "API de Delivery",
+    icone: "food",
     dados: `dados = {
     "restaurante": "Burger House",
     "cardapio": [
@@ -528,7 +586,8 @@ X-Burguer + Batata Frita P + Coca-Cola 350ml = R$ 42.70`,
     fase: "transformacao",
     numero: 3,
     titulo: "Histórico de Partidas",
-    tema: "🎮 API de Games",
+    tema: "API de Games",
+    icone: "game",
     dados: `dados = {
     "jogador": "xDarkSlayer99",
     "jogo": "Valorant",
@@ -575,7 +634,8 @@ Melhor agente: Jett`,
     fase: "funcoes",
     numero: 1,
     titulo: "Funções de Consulta",
-    tema: "🎮 PokéAPI",
+    tema: "PokéAPI",
+    icone: "game",
     dados: `pokedex = [
     {"name": "pikachu", "type": "electric", "hp": 35, "attack": 55},
     {"name": "charizard", "type": "fire", "hp": 78, "attack": 84},
@@ -619,7 +679,8 @@ comparar("pikachu", "charizard")
     fase: "funcoes",
     numero: 2,
     titulo: "Mini Sistema de Pedidos",
-    tema: "🛒 API de E-commerce",
+    tema: "API de E-commerce",
+    icone: "shop",
     dados: `catalogo = {
     "001": {"nome": "Camiseta Básica", "preco": 49.90, "estoque": 20},
     "002": {"nome": "Calça Jeans", "preco": 129.90, "estoque": 8},
@@ -663,7 +724,8 @@ Itens sem estoque: 1`,
     fase: "boss",
     numero: 1,
     titulo: "Dashboard de Streaming",
-    tema: "🎬 API de Streaming",
+    tema: "API de Streaming",
+    icone: "film",
     dados: `dados = {
     "plataforma": "StreamBR",
     "usuarios": [
@@ -754,7 +816,8 @@ Média de episódios básico: 63.0`,
     fase: "boss",
     numero: 2,
     titulo: "API do Campeonato",
-    tema: "⚽ Simulador de Campeonato",
+    tema: "Simulador de Campeonato",
+    icone: "trophy",
     dados: `dados = {
     "campeonato": "Copa SENAI",
     "times": ["Python FC", "Java United", "C++ Rovers", "JavaScript City"],
@@ -812,6 +875,7 @@ interface Desafio {
   numero: number;
   titulo: string;
   tema: string;
+  icone: string;
   dados: string;
   missao: string;
   saida_esperada: string;
@@ -832,7 +896,8 @@ function HintBox({ dica }: { dica: string }) {
         onClick={() => setOpen(!open)}
         className="w-full flex items-center gap-2 px-3.5 py-2.5 bg-transparent border-none cursor-pointer font-mono text-xs font-bold tracking-wide text-amber-400 hover:brightness-110"
       >
-        {open ? "🔓" : "🔒"} {open ? "DICA REVELADA" : "CLIQUE PARA VER A DICA"}
+        {open ? <LockOpen size={14} /> : <Lock size={14} />}
+        {open ? "DICA REVELADA" : "CLIQUE PARA VER A DICA"}
       </button>
       {open && (
         <div className="px-3.5 pb-3 font-sans text-sm leading-relaxed text-foreground">
@@ -874,27 +939,28 @@ function ChallengeCard({
           {d.fase.toUpperCase()} #{d.numero}
         </span>
         <div className="flex-1 min-w-0">
-          <div className="text-foreground font-semibold text-sm">
-            {d.tema.split(" ")[0]} {d.titulo}
+          <div className="text-foreground font-semibold text-sm flex items-center gap-1.5">
+            {TEMA_ICONS[d.icone]}
+            {d.titulo}
           </div>
           <div className="text-muted-foreground/60 text-xs mt-0.5">
             {d.conceitos.join(" · ")}
           </div>
         </div>
         <span
-          className="text-muted-foreground/60 text-lg transition-transform duration-200"
+          className="text-muted-foreground/60 transition-transform duration-200"
           style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}
         >
-          ▾
+          <CaretDown size={16} />
         </span>
       </button>
 
       {/* Expanded content */}
       {expanded && (
         <div className="px-5 pb-5">
-          {/* Tema tag */}
+          {/* Tema */}
           <div className="text-xs text-muted-foreground mb-4 leading-relaxed">
-            {d.tema.split(" ").slice(1).join(" ")}
+            {d.tema}
           </div>
 
           {/* JSON data */}
@@ -912,8 +978,9 @@ function ChallengeCard({
 
           {/* Mission */}
           <div className="bg-primary/10 border border-primary/20 rounded-xl px-4 py-3.5 mb-4">
-            <div className="font-mono text-[0.68rem] font-bold text-primary tracking-widest mb-2">
-              🎯 MISSÃO
+            <div className="font-mono text-[0.68rem] font-bold text-primary tracking-widest mb-2 flex items-center gap-1.5">
+              <Target size={12} />
+              MISSÃO
             </div>
             <pre className="m-0 font-sans text-sm leading-relaxed text-foreground whitespace-pre-wrap">
               {d.missao}
@@ -922,8 +989,9 @@ function ChallengeCard({
 
           {/* Expected output */}
           <div className="bg-muted border border-border rounded-xl px-4 py-3.5 mb-4">
-            <div className="font-mono text-[0.68rem] font-bold text-muted-foreground/60 tracking-widest mb-2">
-              📋 SAÍDA ESPERADA
+            <div className="font-mono text-[0.68rem] font-bold text-muted-foreground/60 tracking-widest mb-2 flex items-center gap-1.5">
+              <ClipboardText size={12} />
+              SAÍDA ESPERADA
             </div>
             <pre className="m-0 font-mono text-xs leading-relaxed text-muted-foreground whitespace-pre-wrap">
               {d.saida_esperada}
@@ -1031,7 +1099,8 @@ export default function DesafiosAPI() {
                   color: active ? f.cor : "var(--muted-foreground)",
                 }}
               >
-                {f.icon} {f.label}
+                {FASE_ICONS[f.id]}
+                {f.label}
                 <span className="opacity-50">
                   {done}/{count}
                 </span>
@@ -1044,7 +1113,7 @@ export default function DesafiosAPI() {
         {faseAtiva && (
           <div className="px-4 py-3 bg-muted border border-border rounded-xl mb-5 text-sm text-muted-foreground flex items-center gap-2.5">
             <span className="text-xl">
-              {FASES.find((f) => f.id === faseAtiva)?.icon}
+              {FASE_ICONS[faseAtiva]}
             </span>
             {FASES.find((f) => f.id === faseAtiva)?.desc}
           </div>
@@ -1064,14 +1133,14 @@ export default function DesafiosAPI() {
                       ? "Marcar como pendente"
                       : "Marcar como concluído"
                   }
-                  className="absolute top-4 -left-8 w-5 h-5 rounded border-2 cursor-pointer flex items-center justify-center text-[0.65rem] z-10 p-0 transition-colors bg-transparent"
+                  className="absolute top-4 -left-8 w-5 h-5 rounded border-2 cursor-pointer flex items-center justify-center z-10 p-0 transition-colors bg-transparent"
                   style={{
                     borderColor: concluidos.has(key) ? "#34d399" : "var(--border)",
                     background: concluidos.has(key) ? "#34d39920" : "transparent",
                     color: "#34d399",
                   }}
                 >
-                  {concluidos.has(key) ? "✓" : ""}
+                  {concluidos.has(key) ? <Check size={11} weight="bold" /> : null}
                 </button>
 
                 <ChallengeCard
@@ -1092,7 +1161,7 @@ export default function DesafiosAPI() {
           <p className="font-mono text-[0.78rem] text-muted-foreground/60 leading-relaxed">
             Completou tudo? Agora pode usar IA para codar — porque sabe ler o
             que ela escreve.{" "}
-            <span className="text-primary">🚀</span>
+            <Rocket size={14} weight="fill" className="inline-block text-primary" />
           </p>
         </div>
       </div>
