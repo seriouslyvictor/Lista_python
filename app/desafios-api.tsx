@@ -1151,7 +1151,7 @@ export default function DesafiosAPI() {
           <div className="flex items-center gap-2.5 mt-3.5">
             <div className="flex-1 h-1 bg-border rounded overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-primary to-cyan-500 rounded transition-all duration-500 ease-in-out"
+                className="h-full bg-linear-to-r from-primary to-cyan-500 rounded transition-all duration-500 ease-in-out"
                 style={{
                   width: `${(concluidos.size / DESAFIOS_VISIVEIS.length) * 100}%`,
                 }}
